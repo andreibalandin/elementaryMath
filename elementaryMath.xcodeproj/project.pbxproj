@@ -13,6 +13,8 @@
 		111511FB220B5FA5004C7D6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 111511FA220B5FA5004C7D6B /* Assets.xcassets */; };
 		111511FE220B5FA5004C7D6B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 111511FC220B5FA5004C7D6B /* LaunchScreen.storyboard */; };
 		11151209220B5FA5004C7D6B /* elementaryMathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11151208220B5FA5004C7D6B /* elementaryMathTests.swift */; };
+		11328403220B767B005C9B17 /* UIProblemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11328402220B767B005C9B17 /* UIProblemView.swift */; };
+		11328405220B76A1005C9B17 /* UIProblemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11328404220B76A1005C9B17 /* UIProblemView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +38,8 @@
 		11151204220B5FA5004C7D6B /* elementaryMathTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = elementaryMathTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		11151208220B5FA5004C7D6B /* elementaryMathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = elementaryMathTests.swift; sourceTree = "<group>"; };
 		1115120A220B5FA5004C7D6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		11328402220B767B005C9B17 /* UIProblemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIProblemView.swift; sourceTree = "<group>"; };
+		11328404220B76A1005C9B17 /* UIProblemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UIProblemView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +81,7 @@
 		111511F2220B5FA4004C7D6B /* elementaryMath */ = {
 			isa = PBXGroup;
 			children = (
+				11328401220B7656005C9B17 /* UIProblemView */,
 				111511F3220B5FA4004C7D6B /* AppDelegate.swift */,
 				111511F5220B5FA4004C7D6B /* ViewController.swift */,
 				111511F7220B5FA4004C7D6B /* Main.storyboard */,
@@ -94,6 +99,15 @@
 				1115120A220B5FA5004C7D6B /* Info.plist */,
 			);
 			path = elementaryMathTests;
+			sourceTree = "<group>";
+		};
+		11328401220B7656005C9B17 /* UIProblemView */ = {
+			isa = PBXGroup;
+			children = (
+				11328402220B767B005C9B17 /* UIProblemView.swift */,
+				11328404220B76A1005C9B17 /* UIProblemView.xib */,
+			);
+			path = UIProblemView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -177,6 +191,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11328405220B76A1005C9B17 /* UIProblemView.xib in Resources */,
 				111511FE220B5FA5004C7D6B /* LaunchScreen.storyboard in Resources */,
 				111511FB220B5FA5004C7D6B /* Assets.xcassets in Resources */,
 				111511F9220B5FA4004C7D6B /* Main.storyboard in Resources */,
@@ -198,6 +213,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				111511F6220B5FA4004C7D6B /* ViewController.swift in Sources */,
+				11328403220B767B005C9B17 /* UIProblemView.swift in Sources */,
 				111511F4220B5FA4004C7D6B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
