@@ -23,11 +23,26 @@ class UIProblemView: UIView {
     }
     
     var isCorrect:Bool {
-        return true
+        let l = Int((leftOperand?.text!)!)
+        let r = Int((rightOperand?.text)!)
+        let a = Int((answer?.text)!)
+        switch operation?.text! {
+        case "-": return l! - r! == a
+        case "+": return l! + r! == a
+        case "/": return l! / r! == a
+        case "*": return l! * r! == a
+        default: return false
+        }
+    }
+    
+    private func rnd(_ scale:Int) -> String {
+        return "\(Int.random(in: 0...scale))"
     }
     
     func randomize(complexity:Int) {
-        
+        leftOperand.text = rnd(complexity)
+        operation.text = (["-", "+", "/", "*"])[Int.random(in:0...3)]
+        rightOperand.text = rnd(complexity)
     }
     
     required init?(coder aDecoder: NSCoder) {
