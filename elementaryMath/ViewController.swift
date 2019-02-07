@@ -9,12 +9,19 @@
 import UIKit
 
 class ViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+    @IBOutlet weak var studentName: UITextField!
+    @IBOutlet weak var assignmentDate: UITextField!
+    @IBOutlet weak var problem: UIProblemView!
+    
+    @IBAction func verify(_ sender: UIButton) {
+        print(studentName?.text as Any)
+        print(assignmentDate?.text as Any)
+        print(problem.isCorrect)
+        print(problem.expression)
     }
-
-
+    
+    override func viewDidLoad() {
+        problem.randomize(complexity: 0)
+        print(problem.expression)
+    }
 }
-

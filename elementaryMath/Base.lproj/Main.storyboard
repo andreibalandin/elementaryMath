@@ -77,6 +77,7 @@
                     </view>
                     <connections>
                         <outlet property="assignmentDate" destination="txE-Qg-6In" id="gS0-HA-pDf"/>
+                        <outlet property="problem" destination="TjV-fY-5mN" id="aNo-9u-bLG"/>
                         <outlet property="studentName" destination="Uxy-DE-WUm" id="N43-ZD-wJ9"/>
                     </connections>
                 </viewController>

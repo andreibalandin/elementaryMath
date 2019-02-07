@@ -10,7 +10,25 @@ import UIKit
 
 @IBDesignable
 class UIProblemView: UIView {
+    @IBOutlet private weak var leftOperand: UILabel!
+    @IBOutlet private weak var operation: UILabel!
+    @IBOutlet private weak var rightOperand: UILabel!
+    @IBOutlet private weak var comparison: UILabel!
+    @IBOutlet private weak var answer: UITextField!
+    
     var contentView:UIView?
+    
+    var expression:String {
+        return (leftOperand?.text)! + (operation?.text)! + (rightOperand?.text)! + (comparison?.text)! + (answer?.text)!
+    }
+    
+    var isCorrect:Bool {
+        return true
+    }
+    
+    func randomize(complexity:Int) {
+        
+    }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
