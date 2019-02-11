@@ -66,8 +66,10 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let date = dateFormatter.date(from: stringDate ?? "")
         if date != nil {
-            let today = Date()
-            print("today is \(today), \(today.compare(date!))")
+            let calendar = Calendar.current
+            let todayComponents = calendar.dateComponents([.year, .month, .day], from: Date())
+            let answerComponents = calendar.dateComponents([.year, .month, .day], from: date!)
+            print("today is \(Date()), \(todayComponents == answerComponents)")
             return true
         }
         else {
