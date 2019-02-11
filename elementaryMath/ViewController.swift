@@ -27,7 +27,11 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     var complexity = 10
     
     @IBAction func verify(_ sender: UIButton) {
-        print("name is valid: \(verifyName(studentName?.text))")
+        let isNameValid = verifyName(studentName?.text)
+        if !isNameValid {
+            studentName.attributedText = formatWrongAnswer(studentName?.text)
+        }
+        print("name is valid: \(isNameValid)")
         print("date valid: \(verifyDate(assignmentDate?.text))")
     }
     
@@ -58,7 +62,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     func verifyName(_ name:String?) -> Bool {
         let regex = try! NSRegularExpression(pattern: "[a-z]+", options: .caseInsensitive)
         let range = NSRange(location: 0, length: name!.utf16.count)
-        return regex.firstMatch(in: name!, options: [], range: range) != nil
+        let isValid = regex.firstMatch(in: name!, options: [], range: range) != nil
+        
+        return isValid
     }
     
     func verifyDate(_ stringDate: String?) -> Bool {
@@ -81,6 +87,13 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         super.loadView()
         problemsCollectionView.dataSource = self
         problemsCollectionView.delegate = self
+    }
+    
+    private func formatWrongAnswer(_ answer: String?) -> NSMutableAttributedString {
+        let range = NSMakeRange(0, answer!.count)
+        let attributedText = NSMutableAttributedString(string: answer!)
+        attributedText.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: range)
+        return attributedText
     }
 }
 
