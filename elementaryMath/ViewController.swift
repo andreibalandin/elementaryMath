@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 18
+        return 20
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -45,14 +45,20 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         }
     }
     
-    private func randomizeProblems() {
+    private func eachProblem(_ f: (UIProblemView) -> Void) {
         for problemCell in problemsCollectionView!.visibleCells as! [ProblemCell] {
-            problemCell.problem.randomize(complexity: complexity)
+            f(problemCell.problem)
         }
     }
     
+    private func randomizeProblems() {
+        eachProblem({ $0.randomize(complexity: complexity) })
+    }
+    
     func verifyName(_ name:String?) -> Bool {
-        return name != ""
+        let regex = try! NSRegularExpression(pattern: "[a-z]+", options: .caseInsensitive)
+        let range = NSRange(location: 0, length: name!.utf16.count)
+        return regex.firstMatch(in: name!, options: [], range: range) != nil
     }
     
     func verifyDate(_ stringDate: String?) -> Bool {
@@ -67,10 +73,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         else {
             return false
         }
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
     }
     
     override func loadView() {
