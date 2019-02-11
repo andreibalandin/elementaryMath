@@ -25,6 +25,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     @IBOutlet weak var assignmentDate: UITextField!
     
     var complexity = 10
+    var wrongAnswers = 0
     
     @IBAction func verify(_ sender: UIButton) {
         let isNameValid = verifyName(studentName?.text)
@@ -33,6 +34,14 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         }
         print("name is valid: \(isNameValid)")
         print("date valid: \(verifyDate(assignmentDate?.text))")
+        
+        wrongAnswers = 0
+        eachProblem {
+            if !$0.isCorrect {
+                $0.answer.attributedText = formatWrongAnswer($0.answer.text)
+                wrongAnswers += 1
+            }
+        }
     }
     
     @IBAction func moreComplex(_ sender: Any) {

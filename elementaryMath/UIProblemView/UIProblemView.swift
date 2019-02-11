@@ -14,7 +14,7 @@ class UIProblemView: UIView {
     @IBOutlet private weak var operation: UILabel!
     @IBOutlet private weak var rightOperand: UILabel!
     @IBOutlet private weak var comparison: UILabel!
-    @IBOutlet private weak var answer: UITextField!
+    @IBOutlet weak var answer: UITextField!
     
     var contentView:UIView?
     
@@ -36,7 +36,7 @@ class UIProblemView: UIView {
     }
     
     private func rnd(_ scale:Int) -> String {
-        return "\(Int.random(in: 0...scale))"
+        return "\(Int.random(in: 1...scale))"
     }
     
     func randomize(complexity:Int) {
