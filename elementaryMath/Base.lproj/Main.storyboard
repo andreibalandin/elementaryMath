@@ -52,11 +52,6 @@
                                     <action selector="verify:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SsH-x3-K6V"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TjV-fY-5mN" customClass="UIProblemView" customModule="elementaryMath" customModuleProvider="target">
-                                <rect key="frame" x="20" y="68" width="291" height="53"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E4C-w3-vFS">
                                 <rect key="frame" x="20" y="30" width="30" height="30"/>
                                 <constraints>
@@ -78,7 +73,7 @@
                                 </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="veN-Wg-8Le">
-                                <rect key="frame" x="20" y="129" width="728" height="875"/>
+                                <rect key="frame" x="20" y="80" width="728" height="924"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="acu-Ma-5MC">
                                     <size key="itemSize" width="305" height="82"/>
@@ -94,20 +89,22 @@
                                             <rect key="frame" x="0.0" y="0.0" width="305" height="82"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PDf-6a-fbc">
-                                                    <rect key="frame" x="131.5" y="30.5" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OaG-JL-HNm" customClass="UIProblemView" customModule="elementaryMath" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="305" height="82"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </view>
                                             </subviews>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="PDf-6a-fbc" firstAttribute="centerX" secondItem="gTC-ao-0P3" secondAttribute="centerX" id="CHz-xX-lGa"/>
-                                            <constraint firstItem="PDf-6a-fbc" firstAttribute="centerY" secondItem="gTC-ao-0P3" secondAttribute="centerY" id="I3s-4f-7lt"/>
+                                            <constraint firstItem="OaG-JL-HNm" firstAttribute="centerX" secondItem="gTC-ao-0P3" secondAttribute="centerX" id="7pM-tl-UNY"/>
+                                            <constraint firstItem="OaG-JL-HNm" firstAttribute="centerY" secondItem="gTC-ao-0P3" secondAttribute="centerY" id="8tN-dW-jsj"/>
+                                            <constraint firstAttribute="trailing" secondItem="OaG-JL-HNm" secondAttribute="trailing" id="IWB-3b-Hff"/>
+                                            <constraint firstItem="OaG-JL-HNm" firstAttribute="top" secondItem="gTC-ao-0P3" secondAttribute="top" id="KVO-tT-Qxn"/>
+                                            <constraint firstAttribute="bottom" secondItem="OaG-JL-HNm" secondAttribute="bottom" id="Mmc-cT-P40"/>
+                                            <constraint firstItem="OaG-JL-HNm" firstAttribute="leading" secondItem="gTC-ao-0P3" secondAttribute="leading" id="p2s-Qr-q7Y"/>
                                         </constraints>
                                         <connections>
-                                            <outlet property="label" destination="PDf-6a-fbc" id="hNq-cz-9Tq"/>
+                                            <outlet property="problem" destination="OaG-JL-HNm" id="UWC-c1-29Q"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -122,6 +119,7 @@
                             <constraint firstItem="Uxy-DE-WUm" firstAttribute="leading" secondItem="RCz-8r-7gg" secondAttribute="trailing" constant="8" symbolic="YES" id="ITa-9W-4nu"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="top" secondItem="HYX-Qo-Gpk" secondAttribute="top" constant="-10" id="J0a-bg-6hA"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="veN-Wg-8Le" secondAttribute="bottom" constant="20" id="JJA-Gq-DaU"/>
+                            <constraint firstItem="veN-Wg-8Le" firstAttribute="top" secondItem="HYX-Qo-Gpk" secondAttribute="bottom" constant="20" id="Nm7-eS-fHa"/>
                             <constraint firstItem="Yty-QZ-LfA" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="TxN-FG-X4T"/>
                             <constraint firstItem="txE-Qg-6In" firstAttribute="centerY" secondItem="HYX-Qo-Gpk" secondAttribute="centerY" id="VkJ-FT-AbU"/>
                             <constraint firstItem="txE-Qg-6In" firstAttribute="leading" secondItem="Yty-QZ-LfA" secondAttribute="trailing" constant="8" symbolic="YES" id="W5X-EQ-vec"/>
@@ -133,14 +131,12 @@
                             <constraint firstItem="E4C-w3-vFS" firstAttribute="centerY" secondItem="RCz-8r-7gg" secondAttribute="centerY" id="hQF-fd-uNH"/>
                             <constraint firstItem="pcZ-Hd-JFX" firstAttribute="leading" secondItem="E4C-w3-vFS" secondAttribute="trailing" constant="8" id="sZX-0a-BiU"/>
                             <constraint firstItem="veN-Wg-8Le" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="snr-zO-QfC"/>
-                            <constraint firstItem="veN-Wg-8Le" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="109" id="xA6-DH-LCU"/>
                             <constraint firstItem="Yty-QZ-LfA" firstAttribute="leading" secondItem="Uxy-DE-WUm" secondAttribute="trailing" constant="20" id="zcR-0X-DOC"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="assignmentDate" destination="txE-Qg-6In" id="gS0-HA-pDf"/>
-                        <outlet property="problem" destination="TjV-fY-5mN" id="aNo-9u-bLG"/>
                         <outlet property="problemsCollectionView" destination="veN-Wg-8Le" id="3ea-bH-N94"/>
                         <outlet property="studentName" destination="Uxy-DE-WUm" id="N43-ZD-wJ9"/>
                     </connections>

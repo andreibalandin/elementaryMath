@@ -11,41 +11,43 @@ import UIKit
 class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return 18
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "problemCell", for: indexPath) as! ProblemCell
-        cell.label.text = "lol"
+        cell.problem.randomize(complexity: complexity)
         return cell
     }
     
     @IBOutlet weak var problemsCollectionView: UICollectionView!
     @IBOutlet weak var studentName: UITextField!
     @IBOutlet weak var assignmentDate: UITextField!
-    @IBOutlet weak var problem: UIProblemView!
     
     var complexity = 10
     
     @IBAction func verify(_ sender: UIButton) {
         print("name is valid: \(verifyName(studentName?.text))")
         print("date valid: \(verifyDate(assignmentDate?.text))")
-        
-        print(problem.isCorrect)
-        print(problem.expression)
     }
     
     @IBAction func moreComplex(_ sender: Any) {
         if complexity < 50 {
             complexity += 1
-            problem.randomize(complexity: complexity)
+            randomizeProblems()
         }
     }
     
     @IBAction func lessComplex(_ sender: Any) {
         if complexity > 5 {
             complexity -= 1
-            problem.randomize(complexity: complexity)
+            randomizeProblems()
+        }
+    }
+    
+    private func randomizeProblems() {
+        for problemCell in problemsCollectionView!.visibleCells as! [ProblemCell] {
+            problemCell.problem.randomize(complexity: complexity)
         }
     }
     
@@ -67,9 +69,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         }
     }
     
-    override func viewDidLoad() {
-        problem.randomize(complexity: complexity)
-        print(problem.expression)
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
     }
     
     override func loadView() {
@@ -80,5 +81,5 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 }
 
 class ProblemCell: UICollectionViewCell {
-    @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var problem: UIProblemView!
 }
