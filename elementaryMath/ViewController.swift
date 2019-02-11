@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return 4
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -23,9 +23,22 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     @IBOutlet weak var problemsCollectionView: UICollectionView!
     @IBOutlet weak var studentName: UITextField!
     @IBOutlet weak var assignmentDate: UITextField!
+    @IBOutlet weak var attemptsLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var scoreLabel: UILabel!
     
     var complexity = 10
     var wrongAnswers = 0
+    var score = 0.0 {
+        didSet {
+            scoreLabel.text = "\(score)"
+        }
+    }
+    var numberOfAttempts: Int = 0 {
+        didSet {
+            attemptsLabel.text = "\(numberOfAttempts)"
+        }
+    }
     
     @IBAction func verify(_ sender: UIButton) {
         let isNameValid = verifyName(studentName?.text)
@@ -42,20 +55,32 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
                 wrongAnswers += 1
             }
         }
+        
+        numberOfAttempts += 1
+        let totalProblems = Double(problemsCollectionView.visibleCells.count)
+        score = (totalProblems - Double(wrongAnswers))/totalProblems/Double(numberOfAttempts)
+        print("score \(score), totla \(totalProblems), wrong \(wrongAnswers), attempts \(numberOfAttempts)")
     }
     
     @IBAction func moreComplex(_ sender: Any) {
         if complexity < 50 {
             complexity += 1
-            randomizeProblems()
+            reset()
         }
     }
     
     @IBAction func lessComplex(_ sender: Any) {
         if complexity > 5 {
             complexity -= 1
-            randomizeProblems()
+            reset()
         }
+    }
+    
+    private func reset() {
+        numberOfAttempts = 0
+        timeLabel.text = "00:00"
+        score = 0.0
+        randomizeProblems()
     }
     
     private func eachProblem(_ f: (UIProblemView) -> Void) {
