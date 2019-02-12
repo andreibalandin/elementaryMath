@@ -64,6 +64,10 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         let WA = Double(wrongAnswers)
         let CA = TP - WA
         score = score * (NA - 1)/NA + CA/TP/NA
+        
+        if isNameValid, isDateValid {
+            screenShot()
+        }
     }
     
     @IBAction func moreComplex(_ sender: Any) {
@@ -133,6 +137,17 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         return attributedText
     }
     
+    // https://stackoverflow.com/questions/25448879/how-do-i-take-a-full-screen-screenshot-in-swift
+    func screenShot() {
+        //Create the UIImage
+        UIGraphicsBeginImageContext(view.frame.size)
+        view.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        //Save it to the camera roll
+        UIImageWriteToSavedPhotosAlbum(image!, nil, nil, nil)
+    }
+
     // https://stackoverflow.com/questions/34206207/printing-the-view-in-ios-with-swift
     func print() {
         let printInfo = UIPrintInfo(dictionary:nil)
@@ -154,7 +169,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         
         // Do it
         printController.present(from: self.view.frame, in: self.view, animated: true, completionHandler: nil)
-
     }
 }
 
