@@ -34,7 +34,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
             scoreLabel.text = "\(score)"
         }
     }
-    var numberOfAttempts: Int = 0 {
+    var numberOfAttempts = 0 {
         didSet {
             attemptsLabel.text = "\(numberOfAttempts)"
         }
@@ -57,9 +57,11 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         }
         
         numberOfAttempts += 1
-        let totalProblems = Double(problemsCollectionView.visibleCells.count)
-        score = (totalProblems - Double(wrongAnswers))/totalProblems/Double(numberOfAttempts)
-        print("score \(score), totla \(totalProblems), wrong \(wrongAnswers), attempts \(numberOfAttempts)")
+        let NA = Double(numberOfAttempts)
+        let TP = Double(problemsCollectionView.visibleCells.count)
+        let WA = Double(wrongAnswers)
+        let CA = TP - WA
+        score = score * (NA - 1)/NA + CA/TP/NA
     }
     
     @IBAction func moreComplex(_ sender: Any) {
