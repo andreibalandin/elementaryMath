@@ -110,37 +110,37 @@
                                 </cells>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Attempts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t0d-dv-Efb">
-                                <rect key="frame" x="549" y="68" width="70" height="21"/>
+                                <rect key="frame" x="659" y="68" width="70" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Egp-yf-649">
-                                <rect key="frame" x="627" y="68" width="11" height="21"/>
+                                <rect key="frame" x="737" y="68" width="11" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7E5-jP-390">
-                                <rect key="frame" x="658" y="68" width="38" height="21"/>
+                                <rect key="frame" x="20" y="68" width="38" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jrF-20-e8z">
-                                <rect key="frame" x="702" y="68" width="46" height="21"/>
+                                <rect key="frame" x="64" y="68" width="46" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="snq-P1-GeT">
-                                <rect key="frame" x="465.5" y="68" width="44.5" height="21"/>
+                                <rect key="frame" x="575.5" y="68" width="44.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Csc-Sl-JZF">
-                                <rect key="frame" x="518" y="68" width="11" height="21"/>
+                                <rect key="frame" x="628" y="68" width="11" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -152,7 +152,7 @@
                             <constraint firstItem="Yty-QZ-LfA" firstAttribute="centerY" secondItem="txE-Qg-6In" secondAttribute="centerY" id="53g-C3-2wK"/>
                             <constraint firstItem="snq-P1-GeT" firstAttribute="centerY" secondItem="Csc-Sl-JZF" secondAttribute="centerY" id="5Hy-V8-2Dr"/>
                             <constraint firstItem="t0d-dv-Efb" firstAttribute="leading" secondItem="Csc-Sl-JZF" secondAttribute="trailing" constant="20" id="5hj-bZ-mUS"/>
-                            <constraint firstItem="7E5-jP-390" firstAttribute="leading" secondItem="Egp-yf-649" secondAttribute="trailing" constant="20" id="7jF-we-fq8"/>
+                            <constraint firstItem="7E5-jP-390" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="7jF-we-fq8"/>
                             <constraint firstItem="pcZ-Hd-JFX" firstAttribute="centerY" secondItem="E4C-w3-vFS" secondAttribute="centerY" id="BuP-Zr-tJV"/>
                             <constraint firstItem="HYX-Qo-Gpk" firstAttribute="leading" secondItem="txE-Qg-6In" secondAttribute="trailing" constant="20" id="ETC-lq-gDE"/>
                             <constraint firstItem="Uxy-DE-WUm" firstAttribute="leading" secondItem="RCz-8r-7gg" secondAttribute="trailing" constant="8" symbolic="YES" id="ITa-9W-4nu"/>
@@ -173,11 +173,11 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="veN-Wg-8Le" secondAttribute="trailing" constant="20" id="cgX-Wa-RNZ"/>
                             <constraint firstItem="E4C-w3-vFS" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="e4Y-WD-RUe"/>
                             <constraint firstItem="jrF-20-e8z" firstAttribute="top" secondItem="HYX-Qo-Gpk" secondAttribute="bottom" constant="8" id="e8q-0D-qte"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="jrF-20-e8z" secondAttribute="trailing" constant="20" id="fUI-bc-fHI"/>
                             <constraint firstItem="E4C-w3-vFS" firstAttribute="centerY" secondItem="RCz-8r-7gg" secondAttribute="centerY" id="hQF-fd-uNH"/>
+                            <constraint firstItem="snq-P1-GeT" firstAttribute="centerY" secondItem="jrF-20-e8z" secondAttribute="centerY" id="hyl-5y-n5x"/>
                             <constraint firstItem="pcZ-Hd-JFX" firstAttribute="leading" secondItem="E4C-w3-vFS" secondAttribute="trailing" constant="8" id="sZX-0a-BiU"/>
-                            <constraint firstItem="Egp-yf-649" firstAttribute="centerY" secondItem="7E5-jP-390" secondAttribute="centerY" id="sgU-41-lgX"/>
                             <constraint firstItem="veN-Wg-8Le" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="snr-zO-QfC"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Egp-yf-649" secondAttribute="trailing" constant="20" id="vVd-vl-jg2"/>
                             <constraint firstItem="Egp-yf-649" firstAttribute="leading" secondItem="t0d-dv-Efb" secondAttribute="trailing" constant="8" id="xzc-QZ-Jnj"/>
                             <constraint firstItem="Yty-QZ-LfA" firstAttribute="leading" secondItem="Uxy-DE-WUm" secondAttribute="trailing" constant="20" id="zcR-0X-DOC"/>
                         </constraints>

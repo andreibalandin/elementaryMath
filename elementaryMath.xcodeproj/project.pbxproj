@@ -15,6 +15,7 @@
 		11151209220B5FA5004C7D6B /* elementaryMathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11151208220B5FA5004C7D6B /* elementaryMathTests.swift */; };
 		11328403220B767B005C9B17 /* UIProblemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11328402220B767B005C9B17 /* UIProblemView.swift */; };
 		11328405220B76A1005C9B17 /* UIProblemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11328404220B76A1005C9B17 /* UIProblemView.xib */; };
+		119B05D7221316D400E8704E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 119B05D6221316D300E8704E /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		1115120A220B5FA5004C7D6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		11328402220B767B005C9B17 /* UIProblemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIProblemView.swift; sourceTree = "<group>"; };
 		11328404220B76A1005C9B17 /* UIProblemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UIProblemView.xib; sourceTree = "<group>"; };
+		119B05D6221316D300E8704E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 		111511E7220B5FA4004C7D6B = {
 			isa = PBXGroup;
 			children = (
+				119B05D6221316D300E8704E /* Default-568h@2x.png */,
 				111511F2220B5FA4004C7D6B /* elementaryMath */,
 				11151207220B5FA5004C7D6B /* elementaryMathTests */,
 				111511F1220B5FA4004C7D6B /* Products */,
@@ -194,6 +197,7 @@
 				11328405220B76A1005C9B17 /* UIProblemView.xib in Resources */,
 				111511FE220B5FA5004C7D6B /* LaunchScreen.storyboard in Resources */,
 				111511FB220B5FA5004C7D6B /* Assets.xcassets in Resources */,
+				119B05D7221316D400E8704E /* Default-568h@2x.png in Resources */,
 				111511F9220B5FA4004C7D6B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -27,11 +27,23 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
     
+    private weak var timer: Timer?
+    private var secondsPassed = 0 {
+        // https://stackoverflow.com/questions/26794703/swift-integer-conversion-to-hours-minutes-seconds
+        didSet {
+            let formatter = DateComponentsFormatter()
+            formatter.allowedUnits = [.hour, .minute, .second]
+            formatter.unitsStyle = .full
+            
+            timeLabel.text = formatter.string(from: TimeInterval(secondsPassed))!
+        }
+    }
+    
     var complexity = 10
     var wrongAnswers = 0
     var score = 0.0 {
         didSet {
-            scoreLabel.text = "\(score)"
+            scoreLabel.text = "\(Int(score * 100))"
         }
     }
     var numberOfAttempts = 0 {
@@ -86,7 +98,14 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     private func reset() {
         numberOfAttempts = 0
-        timeLabel.text = "00:00"
+        if timer != nil {
+            timer?.invalidate()
+        }
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+            self.secondsPassed += 1
+        }
+
+        secondsPassed = 0
         score = 0.0
         randomizeProblems()
     }
@@ -126,10 +145,12 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     override func loadView() {
         super.loadView()
+        
         problemsCollectionView.dataSource = self
         problemsCollectionView.delegate = self
+        reset()
     }
-    
+
     private func formatWrongAnswer(_ answer: String?) -> NSMutableAttributedString {
         let range = NSMakeRange(0, answer!.count)
         let attributedText = NSMutableAttributedString(string: answer!)
@@ -139,12 +160,10 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     // https://stackoverflow.com/questions/25448879/how-do-i-take-a-full-screen-screenshot-in-swift
     func screenShot() {
-        //Create the UIImage
         UIGraphicsBeginImageContext(view.frame.size)
         view.layer.render(in: UIGraphicsGetCurrentContext()!)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        //Save it to the camera roll
         UIImageWriteToSavedPhotosAlbum(image!, nil, nil, nil)
     }
 
