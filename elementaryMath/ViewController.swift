@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return 18
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -82,6 +82,39 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         }
     }
     
+    // https://stackoverflow.com/questions/26689232/scrollview-and-keyboard-swift
+    @IBOutlet weak var scrollView: UIScrollView!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification){
+        guard let keyboardFrame = notification.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+        eachProblem { problem in
+            if problem.answer.isFirstResponder {
+                // https://stackoverflow.com/questions/28813339/move-a-view-up-only-when-the-keyboard-covers-an-input-field
+                let aboveKeyboard = self.view.frame.height - keyboardFrame.cgRectValue.height
+                let problemBottom = problem.superview!.superview!.frame.origin.y + problem.frame.height + scrollView.frame.origin.y
+                if aboveKeyboard < problemBottom {
+                    scrollView.contentOffset.y = view.convert(keyboardFrame.cgRectValue, from: nil).size.height
+                }
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification){
+        scrollView.contentOffset.y = 0
+    }
+
     @IBAction func moreComplex(_ sender: Any) {
         if complexity < 50 {
             complexity += 1
