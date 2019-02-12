@@ -10,6 +10,9 @@ import UIKit
 
 class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
+    @IBAction func unwindToLaunch(_ segue: UIStoryboardSegue) {
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 18
     }
@@ -20,6 +23,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         return cell
     }
     
+    public var initValues: (String?, String?) = (nil, nil)
     @IBOutlet weak var problemsCollectionView: UICollectionView!
     @IBOutlet weak var studentName: UITextField!
     @IBOutlet weak var assignmentDate: UITextField!
@@ -181,6 +185,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         
         problemsCollectionView.dataSource = self
         problemsCollectionView.delegate = self
+        
+        (studentName.text, assignmentDate.text) = initValues
         reset()
     }
 
