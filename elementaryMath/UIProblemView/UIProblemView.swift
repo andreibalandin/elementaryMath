@@ -16,7 +16,7 @@ class UIProblemView: UIView {
     @IBOutlet private weak var comparison: UILabel!
     @IBOutlet weak var answer: UITextField!
     
-    var contentView:UIView?
+    private var contentView:UIView?
     
     var expression:String {
         return (leftOperand?.text)! + (operation?.text)! + (rightOperand?.text)! + (comparison?.text)! + (answer?.text)!

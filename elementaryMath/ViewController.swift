@@ -45,8 +45,10 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         if !isNameValid {
             studentName.attributedText = formatWrongAnswer(studentName?.text)
         }
-        print("name is valid: \(isNameValid)")
-        print("date valid: \(verifyDate(assignmentDate?.text))")
+        let isDateValid = verifyDate(assignmentDate?.text)
+        if !isDateValid {
+            assignmentDate?.attributedText = formatWrongAnswer(assignmentDate?.text)
+        }
         
         wrongAnswers = 0
         eachProblem {
@@ -111,8 +113,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
             let calendar = Calendar.current
             let todayComponents = calendar.dateComponents([.year, .month, .day], from: Date())
             let answerComponents = calendar.dateComponents([.year, .month, .day], from: date!)
-            print("today is \(Date()), \(todayComponents == answerComponents)")
-            return true
+            return todayComponents == answerComponents
         }
         else {
             return false
@@ -131,8 +132,43 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         attributedText.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: range)
         return attributedText
     }
+    
+    // https://stackoverflow.com/questions/34206207/printing-the-view-in-ios-with-swift
+    func print() {
+        let printInfo = UIPrintInfo(dictionary:nil)
+        printInfo.outputType = UIPrintInfo.OutputType.general
+        printInfo.jobName = "My Print Job"
+        
+        // Set up print controller
+        let printController = UIPrintInteractionController.shared
+        printController.printInfo = printInfo
+        
+        // Assign a UIImage version of my UIView as a printing iten
+        printController.printingItem = self.view.toImage()
+        
+        // If you want to specify a printer
+        let printerURL = URL(string: "Your printer URL here, e.g. ipps://HPDC4A3E0DE24A.local.:443/ipp/print")
+        let currentPrinter:UIPrinter = UIPrinter(url: printerURL!)
+        
+        printController.print(to: currentPrinter, completionHandler: nil)
+        
+        // Do it
+        printController.present(from: self.view.frame, in: self.view, animated: true, completionHandler: nil)
+
+    }
 }
 
 class ProblemCell: UICollectionViewCell {
     @IBOutlet weak var problem: UIProblemView!
+}
+
+// https://stackoverflow.com/questions/34206207/printing-the-view-in-ios-with-swift
+extension UIView {
+    func toImage() -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(bounds.size, false, UIScreen.main.scale)
+        drawHierarchy(in: self.bounds, afterScreenUpdates: true)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image!
+    }
 }
