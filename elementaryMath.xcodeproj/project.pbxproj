@@ -11,7 +11,6 @@
 		111511F6220B5FA4004C7D6B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111511F5220B5FA4004C7D6B /* ViewController.swift */; };
 		111511F9220B5FA4004C7D6B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 111511F7220B5FA4004C7D6B /* Main.storyboard */; };
 		111511FB220B5FA5004C7D6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 111511FA220B5FA5004C7D6B /* Assets.xcassets */; };
-		111511FE220B5FA5004C7D6B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 111511FC220B5FA5004C7D6B /* LaunchScreen.storyboard */; };
 		11151209220B5FA5004C7D6B /* elementaryMathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11151208220B5FA5004C7D6B /* elementaryMathTests.swift */; };
 		11328403220B767B005C9B17 /* UIProblemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11328402220B767B005C9B17 /* UIProblemView.swift */; };
 		11328405220B76A1005C9B17 /* UIProblemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11328404220B76A1005C9B17 /* UIProblemView.xib */; };
@@ -36,7 +35,6 @@
 		111511F5220B5FA4004C7D6B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		111511F8220B5FA4004C7D6B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		111511FA220B5FA5004C7D6B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		111511FD220B5FA5004C7D6B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		111511FF220B5FA5004C7D6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		11151204220B5FA5004C7D6B /* elementaryMathTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = elementaryMathTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		11151208220B5FA5004C7D6B /* elementaryMathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = elementaryMathTests.swift; sourceTree = "<group>"; };
@@ -93,7 +91,6 @@
 				111511F5220B5FA4004C7D6B /* ViewController.swift */,
 				111511F7220B5FA4004C7D6B /* Main.storyboard */,
 				111511FA220B5FA5004C7D6B /* Assets.xcassets */,
-				111511FC220B5FA5004C7D6B /* LaunchScreen.storyboard */,
 				111511FF220B5FA5004C7D6B /* Info.plist */,
 				1133B1372213676E00080AE6 /* LaunchScreenViewController.swift */,
 				1133B13922143F0700080AE6 /* MatchingViewController.swift */,
@@ -201,7 +198,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				11328405220B76A1005C9B17 /* UIProblemView.xib in Resources */,
-				111511FE220B5FA5004C7D6B /* LaunchScreen.storyboard in Resources */,
 				111511FB220B5FA5004C7D6B /* Assets.xcassets in Resources */,
 				119B05D7221316D400E8704E /* Default-568h@2x.png in Resources */,
 				111511F9220B5FA4004C7D6B /* Main.storyboard in Resources */,
@@ -255,14 +251,6 @@
 				111511F8220B5FA4004C7D6B /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		111511FC220B5FA5004C7D6B /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				111511FD220B5FA5004C7D6B /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
