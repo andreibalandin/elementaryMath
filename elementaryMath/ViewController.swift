@@ -21,8 +21,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     public var initValues: (String?, String?) = (nil, nil)
     @IBOutlet weak var problemsCollectionView: UICollectionView!
-    @IBOutlet weak var studentName: UITextField!
-    @IBOutlet weak var assignmentDate: UITextField!
+    @IBOutlet weak var studentName: UILabel!
+    @IBOutlet weak var assignmentDate: UILabel!
     @IBOutlet weak var attemptsLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
@@ -53,19 +53,10 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     }
     
     @IBAction func verify(_ sender: UIButton) {
-        let isNameValid = verifyName(studentName?.text)
-        if !isNameValid {
-            studentName.attributedText = formatWrongAnswer(studentName?.text)
-        }
-        let isDateValid = verifyDate(assignmentDate?.text)
-        if !isDateValid {
-            assignmentDate?.attributedText = formatWrongAnswer(assignmentDate?.text)
-        }
-        
         wrongAnswers = 0
         eachProblem {
             if !$0.isCorrect {
-                $0.answer.attributedText = formatWrongAnswer($0.answer.text)
+                $0.answer.attributedText = self.formatWrongAnswer($0.answer.text)
                 wrongAnswers += 1
             }
         }
@@ -77,9 +68,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         let CA = TP - WA
         score = score * (NA - 1)/NA + CA/TP/NA
         
-        if isNameValid, isDateValid {
-            screenShot()
-        }
+        screenShot()
     }
     
     // https://stackoverflow.com/questions/26689232/scrollview-and-keyboard-swift
@@ -153,29 +142,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         eachProblem({ $0.randomize(complexity: complexity) })
     }
     
-    func verifyName(_ name:String?) -> Bool {
-        let regex = try! NSRegularExpression(pattern: "[a-z]+", options: .caseInsensitive)
-        let range = NSRange(location: 0, length: name!.utf16.count)
-        let isValid = regex.firstMatch(in: name!, options: [], range: range) != nil
-        
-        return isValid
-    }
-    
-    func verifyDate(_ stringDate: String?) -> Bool {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        let date = dateFormatter.date(from: stringDate ?? "")
-        if date != nil {
-            let calendar = Calendar.current
-            let todayComponents = calendar.dateComponents([.year, .month, .day], from: Date())
-            let answerComponents = calendar.dateComponents([.year, .month, .day], from: date!)
-            return todayComponents == answerComponents
-        }
-        else {
-            return false
-        }
-    }
-    
     override func loadView() {
         super.loadView()
         
@@ -184,13 +150,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         
         (studentName.text, assignmentDate.text) = initValues
         reset()
-    }
-
-    private func formatWrongAnswer(_ answer: String?) -> NSMutableAttributedString {
-        let range = NSMakeRange(0, answer!.count)
-        let attributedText = NSMutableAttributedString(string: answer!)
-        attributedText.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: range)
-        return attributedText
     }
     
     // https://stackoverflow.com/questions/25448879/how-do-i-take-a-full-screen-screenshot-in-swift
