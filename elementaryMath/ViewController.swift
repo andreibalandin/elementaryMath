@@ -132,7 +132,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         randomizeProblems()
     }
     
-    private func eachProblem(_ f: (UIProblemView) -> Void) {
+    private func eachProblem(_ f: (ProblemView) -> Void) {
         for problemCell in problemsCollectionView!.visibleCells as! [ProblemCell] {
             f(problemCell.problem)
         }
@@ -186,7 +186,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 }
 
 class ProblemCell: UICollectionViewCell {
-    @IBOutlet weak var problem: UIProblemView!
+    @IBOutlet weak var problem: ProblemView!
 }
 
 // https://stackoverflow.com/questions/34206207/printing-the-view-in-ios-with-swift

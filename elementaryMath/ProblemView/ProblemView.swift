@@ -9,7 +9,7 @@
 import UIKit
 
 @IBDesignable
-class UIProblemView: UIView {
+class ProblemView: UIView {
     @IBOutlet private weak var leftOperand: UILabel!
     @IBOutlet private weak var operation: UILabel!
     @IBOutlet private weak var rightOperand: UILabel!
@@ -64,7 +64,7 @@ class UIProblemView: UIView {
     
     func loadViewFromNib() -> UIView? {
         let bundle = Bundle(for: type(of: self))
-        let nib = UINib(nibName: "UIProblemView", bundle: bundle)
+        let nib = UINib(nibName: "ProblemView", bundle: bundle)
         return nib.instantiate(withOwner: self, options: nil).first as? UIView
     }
 }
