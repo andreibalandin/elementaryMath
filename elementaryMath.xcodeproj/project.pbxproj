@@ -16,6 +16,7 @@
 		11328403220B767B005C9B17 /* UIProblemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11328402220B767B005C9B17 /* UIProblemView.swift */; };
 		11328405220B76A1005C9B17 /* UIProblemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11328404220B76A1005C9B17 /* UIProblemView.xib */; };
 		1133B1382213676E00080AE6 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1133B1372213676E00080AE6 /* LaunchScreenViewController.swift */; };
+		1133B13A22143F0700080AE6 /* MatchingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1133B13922143F0700080AE6 /* MatchingViewController.swift */; };
 		119B05D7221316D400E8704E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 119B05D6221316D300E8704E /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +44,7 @@
 		11328402220B767B005C9B17 /* UIProblemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIProblemView.swift; sourceTree = "<group>"; };
 		11328404220B76A1005C9B17 /* UIProblemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UIProblemView.xib; sourceTree = "<group>"; };
 		1133B1372213676E00080AE6 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
+		1133B13922143F0700080AE6 /* MatchingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchingViewController.swift; sourceTree = "<group>"; };
 		119B05D6221316D300E8704E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -94,6 +96,7 @@
 				111511FC220B5FA5004C7D6B /* LaunchScreen.storyboard */,
 				111511FF220B5FA5004C7D6B /* Info.plist */,
 				1133B1372213676E00080AE6 /* LaunchScreenViewController.swift */,
+				1133B13922143F0700080AE6 /* MatchingViewController.swift */,
 			);
 			path = elementaryMath;
 			sourceTree = "<group>";
@@ -223,6 +226,7 @@
 				11328403220B767B005C9B17 /* UIProblemView.swift in Sources */,
 				1133B1382213676E00080AE6 /* LaunchScreenViewController.swift in Sources */,
 				111511F4220B5FA4004C7D6B /* AppDelegate.swift in Sources */,
+				1133B13A22143F0700080AE6 /* MatchingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

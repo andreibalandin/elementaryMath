@@ -25,6 +25,8 @@ class LaunchScreenViewController: UIViewController {
         case "calculationsGameSegue":
             let calcualtionsGameController = segue.destination as! ViewController
             calcualtionsGameController.initValues = (studentName!.text, assignmentDate!.text)
+        case "matchingGameSegue":
+            print("matchingGameSegue")
         default:
             print("segue \(segue.identifier!) not supported")
         }
