@@ -108,7 +108,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RCz-8r-7gg">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RCz-8r-7gg">
                                 <rect key="frame" x="108" y="84.5" width="45" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="DP4-nJ-4O2"/>
@@ -237,7 +237,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yty-QZ-LfA">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yty-QZ-LfA">
                                 <rect key="frame" x="384" y="84.5" width="40" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="Ljq-lp-kaW"/>
@@ -246,8 +246,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="[Name]" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3QK-yU-qNy">
-                                <rect key="frame" x="161" y="84.5" width="203" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[Name]" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3QK-yU-qNy">
+                                <rect key="frame" x="161" y="84.5" width="150" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="H4q-vN-6PB"/>
                                 </constraints>
@@ -255,8 +255,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="[date]" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KwR-Q1-CYd">
-                                <rect key="frame" x="432" y="84.5" width="237" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[date]" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KwR-Q1-CYd">
+                                <rect key="frame" x="432" y="84.5" width="150" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="mhP-a8-7ky"/>
                                 </constraints>
@@ -267,7 +267,7 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="HYX-Qo-Gpk" firstAttribute="leading" secondItem="KwR-Q1-CYd" secondAttribute="trailing" constant="20" id="2bw-qO-qxu"/>
+                            <constraint firstItem="HYX-Qo-Gpk" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="KwR-Q1-CYd" secondAttribute="trailing" constant="20" id="2bw-qO-qxu"/>
                             <constraint firstItem="snq-P1-GeT" firstAttribute="centerY" secondItem="Csc-Sl-JZF" secondAttribute="centerY" id="5Hy-V8-2Dr"/>
                             <constraint firstItem="t0d-dv-Efb" firstAttribute="leading" secondItem="Csc-Sl-JZF" secondAttribute="trailing" constant="20" id="5hj-bZ-mUS"/>
                             <constraint firstItem="7E5-jP-390" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="7jF-we-fq8"/>
@@ -279,7 +279,7 @@
                             <constraint firstItem="3QK-yU-qNy" firstAttribute="centerY" secondItem="Yty-QZ-LfA" secondAttribute="centerY" id="LXk-6S-BrE"/>
                             <constraint firstItem="Csc-Sl-JZF" firstAttribute="centerY" secondItem="t0d-dv-Efb" secondAttribute="centerY" id="RDj-rJ-odm"/>
                             <constraint firstItem="snq-P1-GeT" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="jrF-20-e8z" secondAttribute="trailing" constant="20" id="SD2-h8-1V2"/>
-                            <constraint firstItem="Yty-QZ-LfA" firstAttribute="leading" secondItem="3QK-yU-qNy" secondAttribute="trailing" constant="20" id="SEm-AB-4Ik"/>
+                            <constraint firstItem="Yty-QZ-LfA" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="3QK-yU-qNy" secondAttribute="trailing" constant="20" id="SEm-AB-4Ik"/>
                             <constraint firstItem="KwR-Q1-CYd" firstAttribute="leading" secondItem="Yty-QZ-LfA" secondAttribute="trailing" constant="8" id="T1p-Nu-FGX"/>
                             <constraint firstItem="t0d-dv-Efb" firstAttribute="centerY" secondItem="Egp-yf-649" secondAttribute="centerY" id="TWE-Fa-GQR"/>
                             <constraint firstItem="Csc-Sl-JZF" firstAttribute="leading" secondItem="snq-P1-GeT" secondAttribute="trailing" constant="8" id="TjO-2v-BZL"/>
@@ -328,6 +328,9 @@
                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LJH-BC-9lP" customClass="ControlView" customModule="elementaryMath" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="70" width="768" height="128"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="4BZ-O3-Ob7"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
