@@ -46,21 +46,25 @@ class ControlView: UIView {
         }
     }
     
-    @IBAction func lessComplex(_ sender: Any) {
+    @IBAction private func lessComplex(_ sender: Any) {
         if complexity > 0 {
             complexity -= 1
         }
     }
     
-    @IBAction func moreComplex(_ sender: Any) {
+    @IBAction private func moreComplex(_ sender: Any) {
         if complexity < 100 {
             complexity += 1
         }
     }
     
-    @IBAction func verifyAction(_ sender: Any) {
+    @IBAction private func verifyAction(_ sender: Any) {
         scoreLabel?.text = String(delegate!.verify())
         
+        guard view != nil else {
+            assertionFailure("view property must be set up")
+            return
+        }
         UIGraphicsBeginImageContext(view!.frame.size)
         view!.layer.render(in: UIGraphicsGetCurrentContext()!)
         let image = UIGraphicsGetImageFromCurrentImageContext()

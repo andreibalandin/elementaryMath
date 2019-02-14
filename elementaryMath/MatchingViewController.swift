@@ -22,9 +22,12 @@ class MatchingViewController: UIViewController, GameInitialization, GameControlD
         return 0
     }
     
-    override func viewDidLayoutSubviews() {
+    override func viewDidLoad() {
         gameControl.name = name
         gameControl.date = date
+        gameControl.view = view
         gameControl.delegate = self
+        
+        gameControl.reset()
     }
 }
