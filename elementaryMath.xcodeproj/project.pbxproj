@@ -13,6 +13,7 @@
 		111511F9220B5FA4004C7D6B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 111511F7220B5FA4004C7D6B /* Main.storyboard */; };
 		111511FB220B5FA5004C7D6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 111511FA220B5FA5004C7D6B /* Assets.xcassets */; };
 		11151209220B5FA5004C7D6B /* elementaryMathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11151208220B5FA5004C7D6B /* elementaryMathTests.swift */; };
+		1123F8802215974200114F1D /* ControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1123F87F2215974200114F1D /* ControlView.swift */; };
 		11328403220B767B005C9B17 /* ProblemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11328402220B767B005C9B17 /* ProblemView.swift */; };
 		11328405220B76A1005C9B17 /* ProblemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11328404220B76A1005C9B17 /* ProblemView.xib */; };
 		1133B1382213676E00080AE6 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1133B1372213676E00080AE6 /* LaunchScreenViewController.swift */; };
@@ -41,6 +42,7 @@
 		11151204220B5FA5004C7D6B /* elementaryMathTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = elementaryMathTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		11151208220B5FA5004C7D6B /* elementaryMathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = elementaryMathTests.swift; sourceTree = "<group>"; };
 		1115120A220B5FA5004C7D6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1123F87F2215974200114F1D /* ControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlView.swift; sourceTree = "<group>"; };
 		11328402220B767B005C9B17 /* ProblemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProblemView.swift; sourceTree = "<group>"; };
 		11328404220B76A1005C9B17 /* ProblemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProblemView.xib; sourceTree = "<group>"; };
 		1133B1372213676E00080AE6 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 			isa = PBXGroup;
 			children = (
 				11048DF3221581F10098ABF2 /* ControlView.xib */,
+				1123F87F2215974200114F1D /* ControlView.swift */,
 			);
 			path = ControlView;
 			sourceTree = "<group>";
@@ -234,6 +237,7 @@
 				11328403220B767B005C9B17 /* ProblemView.swift in Sources */,
 				1133B1382213676E00080AE6 /* LaunchScreenViewController.swift in Sources */,
 				111511F4220B5FA4004C7D6B /* AppDelegate.swift in Sources */,
+				1123F8802215974200114F1D /* ControlView.swift in Sources */,
 				1133B13A22143F0700080AE6 /* MatchingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

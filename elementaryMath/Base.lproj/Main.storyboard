@@ -103,7 +103,6 @@
         <!--Calculations Game-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <viewController title="Calculations Game" id="BYZ-38-t0r" customClass="ViewController" customModule="elementaryMath" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
@@ -314,6 +313,7 @@
                         <outlet property="timeLabel" destination="jrF-20-e8z" id="chP-kw-Lay"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1196.875" y="-316.40625"/>
         </scene>
@@ -324,7 +324,18 @@
                     <view key="view" contentMode="scaleToFill" id="uVA-91-wyC">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LJH-BC-9lP" customClass="ControlView" customModule="elementaryMath" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="70" width="768" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="LJH-BC-9lP" firstAttribute="trailing" secondItem="5gB-Pg-KPl" secondAttribute="trailing" id="FHs-8I-ihm"/>
+                            <constraint firstItem="LJH-BC-9lP" firstAttribute="leading" secondItem="5gB-Pg-KPl" secondAttribute="leading" id="OWH-Hl-ld0"/>
+                            <constraint firstItem="LJH-BC-9lP" firstAttribute="top" secondItem="5gB-Pg-KPl" secondAttribute="top" id="z3X-i8-oyx"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="5gB-Pg-KPl"/>
                     </view>
                 </viewController>
