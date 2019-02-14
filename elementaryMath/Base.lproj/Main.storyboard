@@ -320,7 +320,7 @@
         <!--Matching Game-->
         <scene sceneID="ZDQ-Op-zTF">
             <objects>
-                <viewController title="Matching Game" id="FN9-td-62C" sceneMemberID="viewController">
+                <viewController title="Matching Game" id="FN9-td-62C" customClass="MatchingViewController" customModule="elementaryMath" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="uVA-91-wyC">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -338,6 +338,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5gB-Pg-KPl"/>
                     </view>
+                    <connections>
+                        <outlet property="gameControl" destination="LJH-BC-9lP" id="vnX-fO-W4g"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="953-y7-j42" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -11,6 +11,13 @@ import UIKit
 class LaunchScreenViewController: UIViewController {
     @IBOutlet weak var studentName: UITextField!
     @IBOutlet weak var assignmentDate: UITextField!
+    private var date: Date? {
+        get {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            return dateFormatter.date(from: assignmentDate?.text ?? "")
+        }
+    }
 
     private func verify() -> Bool {
         let isNameValid = verifyName(studentName?.text)
@@ -18,7 +25,7 @@ class LaunchScreenViewController: UIViewController {
             studentName.attributedText = self.formatWrongAnswer(studentName?.text)
         }
 
-        let isDateValid = verifyDate(assignmentDate?.text)
+        let isDateValid = verifyDate(date)
         if !isDateValid {
             assignmentDate?.attributedText = self.formatWrongAnswer(assignmentDate?.text)
         }
@@ -34,10 +41,7 @@ class LaunchScreenViewController: UIViewController {
         return isValid
     }
     
-    private func verifyDate(_ stringDate: String?) -> Bool {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        let date = dateFormatter.date(from: stringDate ?? "")
+    private func verifyDate(_ date: Date?) -> Bool {
         if date != nil {
             let calendar = Calendar.current
             let todayComponents = calendar.dateComponents([.year, .month, .day], from: Date())
@@ -56,6 +60,9 @@ class LaunchScreenViewController: UIViewController {
             let calcualtionsGameController = segue.destination as! ViewController
             calcualtionsGameController.initValues = (studentName!.text, assignmentDate!.text)
         case "matchingGameSegue":
+            var props = segue.destination as! GameInitialization
+            props.name = (studentName!.text)!
+            props.date = date!
             print("matchingGameSegue")
         default:
             print("segue \(segue.identifier!) not supported")
@@ -67,6 +74,10 @@ class LaunchScreenViewController: UIViewController {
     }
 }
 
+protocol GameInitialization {
+    var name: String { get set }
+    var date: Date { get set }
+}
 extension UIViewController {
     func formatWrongAnswer(_ answer: String?) -> NSMutableAttributedString {
         let range = NSMakeRange(0, answer!.count)
