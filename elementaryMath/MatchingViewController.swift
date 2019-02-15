@@ -40,6 +40,20 @@ class MatchingViewController: UIViewController, GameInitialization, GameControlD
                 view.addSubview(button.button)
             }
         }
+        
+        
+        let links = Links(view, {a, b in
+            let (x1, y1) = a
+            let (x2, y2) = b
+            let left = min(x1, x2) * size + padding/2
+            let right = (max(x1, x2) + 1) * size - padding/2
+            let top = min(y1, y2) * size + yOffset + padding/2
+            let bottom = (max(y1, y2) + 1) * size + yOffset - padding/2
+            let result = CGRect(x: left, y: top, width: right-left, height: bottom-top)
+            print("new link \(a) -> \(b) = \(result)")
+            return result
+        })
+        links.link((0,1), (0,1))
     }
     
     @objc func tapDigit(sender: UIButton) {
@@ -63,6 +77,58 @@ class MatchingViewController: UIViewController, GameInitialization, GameControlD
         gameControl.delegate = self
         
         gameControl.reset()
+    }
+}
+
+class Links {
+    private var links: [((Int, Int), (Int, Int))] = []
+    private var linkViews: [UIView] = []
+    
+    var superview: UIView
+    var frameFactory: ((Int, Int), (Int, Int)) -> CGRect
+    init(_ superview: UIView, _ frameFactory: @escaping ((Int, Int), (Int, Int)) -> CGRect) {
+        self.superview = superview
+        self.frameFactory = frameFactory
+    }
+    
+    func link(_ a: (Int, Int), _ b: (Int, Int)) {
+        if !isLinked(a), !isLinked(b) {
+            links.append((a, b))
+            let view = UIView(frame: frameFactory(a, b))
+            view.layer.zPosition = 0
+            view.layer.borderWidth = 2
+            view.layer.backgroundColor = UIColor.lightGray.cgColor
+            view.layer.cornerRadius = 15
+            view.isUserInteractionEnabled = false
+            superview.addSubview(view)
+        }
+    }
+    
+    func unlink(_ coords: (Int, Int)) {
+        let i = findIndex(coords)
+        if i != nil {
+            links.remove(at: i!)
+        }
+    }
+    
+    func isLinked(_ coords: (Int, Int)) -> Bool {
+        for l in links {
+            let (a, b) = l
+            if a == coords || b == coords {
+                return true
+            }
+        }
+        return false
+    }
+    
+    private func findIndex(_ coords: (Int, Int)) -> Int? {
+        for i in 0..<links.count {
+            let (a, b) = links[i]
+            if a == coords || b == coords {
+                return i
+            }
+        }
+        return nil
     }
 }
 
@@ -126,6 +192,7 @@ class MatchingButtonWrapper {
         button = UIButton(frame: frame)
         button.backgroundColor = UIColor.gray
         button.layer.cornerRadius = 10
+        button.layer.zPosition = 10
     }
 
     func select(_ andNeighbours: [MatchingButtonWrapper]) {
