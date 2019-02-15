@@ -12,6 +12,7 @@ class MatchingViewController: UIViewController, GameInitialization, GameControlD
     var name: String = ""
     var date: Date = Date()
     private var buttons: Matrix<MatchingButtonWrapper>?
+    private var selectedNeighbour: MatchingButtonWrapper? = nil
     private var selectedButton: MatchingButtonWrapper? = nil
     
     @IBOutlet weak var gameControl: ControlView!
@@ -60,6 +61,10 @@ class MatchingViewController: UIViewController, GameInitialization, GameControlD
         let button = buttons!.get(sender.tag)!
         if selectedButton != nil {
             selectedButton?.deselect((buttons?.neighbors(selectedButton!.coords!))!)
+            
+            if buttons?.isNeighbour(selectedButton?.coords, button.coords) {
+                selectedNeighbour = selectedButton
+            }
         }
         selectedButton = button
         let withNeighbors = buttons!.neighbors(button.coords!)
@@ -163,6 +168,12 @@ class Matrix<T> {
     
     func set(_ coords: (Int, Int), _ value: T?) {
         data[CoordsToIndex(coords)] = value
+    }
+    
+    func isNeighbour(_ a: (Int, Int), _ b: (Int, Int)) -> Bool {
+        let (x1, y1) = a
+        let (x2, y2) = b
+        return abs(x1 - x2) + abs(y1 - y2) == 1
     }
     
     func neighbors(_ coords: (Int, Int)) -> [T] {
