@@ -11,6 +11,7 @@ import UIKit
 class MatchingViewController: UIViewController, GameInitialization, GameControlDelegate {
     var name: String = ""
     var date: Date = Date()
+    private var links: Links? = nil
     private var buttons: Matrix<MatchingButtonWrapper>?
     private var selectedNeighbour: MatchingButtonWrapper? = nil
     private var selectedButton: MatchingButtonWrapper? = nil
@@ -42,8 +43,7 @@ class MatchingViewController: UIViewController, GameInitialization, GameControlD
             }
         }
         
-        
-        let links = Links(view, {a, b in
+        links = Links(view, {a, b in
             let (x1, y1) = a
             let (x2, y2) = b
             let left = min(x1, x2) * size + padding/2
@@ -54,16 +54,20 @@ class MatchingViewController: UIViewController, GameInitialization, GameControlD
             print("new link \(a) -> \(b) = \(result)")
             return result
         })
-        links.link((0,1), (0,1))
     }
     
     @objc func tapDigit(sender: UIButton) {
         let button = buttons!.get(sender.tag)!
+        links!.unlink(button.coords!)
         if selectedButton != nil {
-            selectedButton?.deselect((buttons?.neighbors(selectedButton!.coords!))!)
+            selectedButton!.deselect((buttons?.neighbors(selectedButton!.coords!))!)
             
-            if buttons?.isNeighbour(selectedButton?.coords, button.coords) {
+            if buttons!.isNeighbour(selectedButton!.coords!, button.coords!),
+                !links!.isLinked(selectedButton!.coords!) {
                 selectedNeighbour = selectedButton
+                
+                links!.unlink(selectedNeighbour!.coords!)
+                links!.link(button.coords!, selectedNeighbour!.coords!)
             }
         }
         selectedButton = button
@@ -87,7 +91,12 @@ class MatchingViewController: UIViewController, GameInitialization, GameControlD
 
 class Links {
     private var links: [((Int, Int), (Int, Int))] = []
-    private var linkViews: [UIView] = []
+    private var views: [[Int]:UIView] = [:]
+    private func coordsToList(_ a: (Int, Int), _ b: (Int, Int)) -> [Int] {
+        let (x1, y1) = a
+        let (x2, y2) = b
+        return [x1, y1, x2, y2]
+    }
     
     var superview: UIView
     var frameFactory: ((Int, Int), (Int, Int)) -> CGRect
@@ -102,9 +111,10 @@ class Links {
             let view = UIView(frame: frameFactory(a, b))
             view.layer.zPosition = 0
             view.layer.borderWidth = 2
-            view.layer.backgroundColor = UIColor.lightGray.cgColor
+            view.layer.backgroundColor = UIColor(displayP3Red: 0, green: 0, blue: 0, alpha: 0).cgColor
             view.layer.cornerRadius = 15
             view.isUserInteractionEnabled = false
+            views[coordsToList(a, b)] = view
             superview.addSubview(view)
         }
     }
@@ -112,6 +122,9 @@ class Links {
     func unlink(_ coords: (Int, Int)) {
         let i = findIndex(coords)
         if i != nil {
+            let ((x1, y1), (x2, y2)) = links[i!]
+            let view = views[[x1, y1, x2, y2]]
+            view!.removeFromSuperview()
             links.remove(at: i!)
         }
     }
