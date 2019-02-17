@@ -76,7 +76,43 @@ class MatchingViewController: UIViewController, GameInitialization, GameControlD
     }
 
     func verify() -> Int {
-        return 0
+        var correctAnswers = 0.0
+        var wrongAnswers = 0.0
+        var missedMatches = 0.0
+        
+        for x in 0..<buttons!.columns {
+            for y in 0..<buttons!.rows {
+                let b = links?.linkedTo((x, y))
+                let v1 = buttons!.get((x, y))!.value
+
+                if b != nil { // test matches
+                    let v2 = buttons!.get(b!)!.value
+                    if v1 + v2 == 10 {
+                        correctAnswers += 1
+                    }
+                    else {
+                        wrongAnswers += 1
+                    }
+                }
+                else { // test for missed matches
+                    let neighbours = buttons!.neighbors((x, y))
+                    let coords = neighbours.map({ $0.coords! })
+                    let available = coords.filter({ !links!.isLinked($0) })
+                    let values = available.map({ buttons!.get($0)!.value })
+                    
+                    for v2 in values {
+                        if v1 + v2 == 10 {
+                            missedMatches += 1
+                        }
+                    }
+                }
+            }
+        }
+        
+        if Int(correctAnswers + wrongAnswers + missedMatches) == 0 {
+            return 100
+        }
+        return Int(correctAnswers / (correctAnswers + wrongAnswers + missedMatches) * 100)
     }
     
     override func viewDidLoad() {
@@ -117,6 +153,19 @@ class Links {
             views[coordsToList(a, b)] = view
             superview.addSubview(view)
         }
+    }
+    
+    func linkedTo(_ coords: (Int, Int)) -> (Int, Int)? {
+        let i = findIndex(coords)
+        if i == nil {
+            return nil
+        }
+        
+        let (a, b) = links[i!]
+        if a == coords {
+            return b
+        }
+        return a
     }
     
     func unlink(_ coords: (Int, Int)) {
@@ -219,6 +268,12 @@ class MatchingButtonWrapper {
         button.layer.zPosition = 10
     }
 
+    var value: Int {
+        get {
+            return Int(button.titleLabel!.text!)!
+        }
+    }
+    
     func select(_ andNeighbours: [MatchingButtonWrapper]) {
         button.layer.borderWidth = 4
         
