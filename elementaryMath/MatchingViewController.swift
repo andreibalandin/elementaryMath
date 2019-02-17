@@ -25,9 +25,15 @@ class MatchingViewController: UIViewController, GameInitialization, GameControlD
         let width = Int(view.frame.size.width)
         let height = width
         let yOffset = 200
-        let buttonCount = 10
+        let buttonCount = 5 + 6 * complexity/100
         let size = width/buttonCount
         let padding = 10
+        
+        if buttons != nil {
+            for button in buttons!.data {
+                button!.button.removeFromSuperview()
+            }
+        }
         buttons = Matrix<MatchingButtonWrapper>(width/size, height/size)
         
         for x in 0..<buttons!.columns {
@@ -43,6 +49,9 @@ class MatchingViewController: UIViewController, GameInitialization, GameControlD
             }
         }
         
+        if links != nil {
+            links?.destroy()
+        }
         links = Links(view, {a, b in
             let (x1, y1) = a
             let (x2, y2) = b
@@ -120,6 +129,7 @@ class MatchingViewController: UIViewController, GameInitialization, GameControlD
         gameControl.date = date
         gameControl.view = view
         gameControl.delegate = self
+        gameControl.complexityStep = 100/6
         
         gameControl.reset()
     }
@@ -197,12 +207,18 @@ class Links {
         }
         return nil
     }
+    
+    func destroy() {
+        for (_, view) in views {
+            view.removeFromSuperview()
+        }
+    }
 }
 
 class Matrix<T> {
     let columns: Int
     let rows: Int
-    private var data: [T?]
+    private(set) var data: [T?]
     
     init(_ columns: Int, _ rows: Int) {
         self.columns = columns

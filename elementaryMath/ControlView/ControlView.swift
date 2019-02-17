@@ -46,15 +46,16 @@ class ControlView: UIView {
         }
     }
     
+    var complexityStep = 1
     @IBAction private func lessComplex(_ sender: Any) {
-        if complexity > 0 {
-            complexity -= 1
+        if complexity > complexityStep + 1 {
+            complexity -= complexityStep
         }
     }
     
     @IBAction private func moreComplex(_ sender: Any) {
-        if complexity < 100 {
-            complexity += 1
+        if complexity <= 100 - complexityStep {
+            complexity += complexityStep
         }
     }
     
