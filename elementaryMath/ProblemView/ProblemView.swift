@@ -8,6 +8,7 @@
 
 import UIKit
 
+// represents a problem in form A{+-*/}B=C with random A, B and operation. C must be filled in by the user
 @IBDesignable
 class ProblemView: UIView {
     @IBOutlet private weak var leftOperand: UILabel!
@@ -16,12 +17,14 @@ class ProblemView: UIView {
     @IBOutlet private weak var comparison: UILabel!
     @IBOutlet weak var answer: UITextField!
     
+    // for IBDesignable implementation
     private var contentView:UIView?
     
     var expression:String {
         return (leftOperand?.text)! + (operation?.text)! + (rightOperand?.text)! + (comparison?.text)! + (answer?.text)!
     }
     
+    // validate the answer
     var isCorrect:Bool {
         let l = Int((leftOperand?.text!)!)
         let r = Int((rightOperand?.text)!)
@@ -39,12 +42,14 @@ class ProblemView: UIView {
         return "\(Int.random(in: 1...scale))"
     }
     
+    // create a random problem
     func randomize(complexity:Int) {
         leftOperand.text = rnd(complexity)
         operation.text = (["-", "+", "/", "*"])[Int.random(in:0...3)]
         rightOperand.text = rnd(complexity)
     }
     
+    // for IBDesignable
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
