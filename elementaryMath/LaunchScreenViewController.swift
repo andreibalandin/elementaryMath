@@ -8,6 +8,7 @@
 
 import UIKit
 
+// provides way to input name and date, and to choose one of two worksheets
 class LaunchScreenViewController: UIViewController {
     @IBOutlet weak var studentName: UITextField!
     @IBOutlet weak var assignmentDate: UITextField!
@@ -19,6 +20,7 @@ class LaunchScreenViewController: UIViewController {
         }
     }
 
+    // before choosing a worksheet, name and current date must be filled
     private func verify() -> Bool {
         let isNameValid = verifyName(studentName?.text)
         if !isNameValid {
@@ -33,6 +35,7 @@ class LaunchScreenViewController: UIViewController {
         return isNameValid && isDateValid
     }
     
+    // name can be any letter sequence
     private func verifyName(_ name:String?) -> Bool {
         let regex = try! NSRegularExpression(pattern: "[a-z]+", options: .caseInsensitive)
         let range = NSRange(location: 0, length: name!.utf16.count)
@@ -41,6 +44,7 @@ class LaunchScreenViewController: UIViewController {
         return isValid
     }
     
+    // date must be todays date
     private func verifyDate(_ date: Date?) -> Bool {
         if date != nil {
             let calendar = Calendar.current
@@ -54,12 +58,15 @@ class LaunchScreenViewController: UIViewController {
     }
     
     // MARK: - Navigation
+    // pass name and date to next screen
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier! {
         case "calculationsGameSegue":
+            // this screen has original header code in it
             let calcualtionsGameController = segue.destination as! ViewController
             calcualtionsGameController.initValues = (studentName!.text, assignmentDate!.text)
         case "matchingGameSegue":
+            // here the header was extracted into its own class
             var props = segue.destination as! GameInitialization
             props.name = (studentName!.text)!
             props.date = date!
@@ -69,15 +76,19 @@ class LaunchScreenViewController: UIViewController {
         }
     }
     
+    // check name and date before navigating away
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         return self.verify()
     }
 }
 
+// implement to receive data from launcher screen
 protocol GameInitialization {
     var name: String { get set }
     var date: Date { get set }
 }
+
+// extracted from original math sheet since now this code is used by three screens
 extension UIViewController {
     func formatWrongAnswer(_ answer: String?) -> NSMutableAttributedString {
         let range = NSMakeRange(0, answer!.count)
