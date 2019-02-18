@@ -43,6 +43,7 @@
 		11151208220B5FA5004C7D6B /* elementaryMathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = elementaryMathTests.swift; sourceTree = "<group>"; };
 		1115120A220B5FA5004C7D6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1123F87F2215974200114F1D /* ControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlView.swift; sourceTree = "<group>"; };
+		11247EE5221AD41C0023CC1D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		11328402220B767B005C9B17 /* ProblemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProblemView.swift; sourceTree = "<group>"; };
 		11328404220B76A1005C9B17 /* ProblemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProblemView.xib; sourceTree = "<group>"; };
 		1133B1372213676E00080AE6 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
@@ -80,6 +81,7 @@
 		111511E7220B5FA4004C7D6B = {
 			isa = PBXGroup;
 			children = (
+				11247EE5221AD41C0023CC1D /* README.md */,
 				119B05D6221316D300E8704E /* Default-568h@2x.png */,
 				111511F2220B5FA4004C7D6B /* elementaryMath */,
 				11151207220B5FA5004C7D6B /* elementaryMathTests */,
