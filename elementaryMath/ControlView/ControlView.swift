@@ -8,9 +8,14 @@
 
 import UIKit
 
+// this view provides problem complexity control, name and date fields and verify button
+// also the number of attempts and the timer are displayed
+// the view can be placed on story board
 @IBDesignable
 class ControlView: UIView {
+    // student name
     @IBOutlet private weak var nameLabel: UILabel!
+    // simplify access and hide implementation detail
     var name: String {
         get {
             return (nameLabel?.text)!
@@ -20,7 +25,9 @@ class ControlView: UIView {
         }
     }
     
+    // todays date
     @IBOutlet private weak var dateLabel: UILabel!
+    // default to today, but it is set from the start screen
     var date: Date = Date() {
         didSet {
             let formatter = DateFormatter()
@@ -29,8 +36,10 @@ class ControlView: UIView {
         }
     }
     
+    // write computed score here
     @IBOutlet private weak var scoreLabel: UILabel!
     
+    // and the number of times verify button was pressed
     @IBOutlet private weak var attemptsLabel: UILabel!
     private var attempts = 0 {
         didSet {
@@ -38,14 +47,21 @@ class ControlView: UIView {
         }
     }
     
+    // consumer has to implement a few methods to receive messages from this class
     public weak var delegate: GameControlDelegate?
+    
+    // this view will be saved as a screen shot after verification
     public weak var view: UIView?
+    
+    // complexity value is used by consumer to set up the game
     private var complexity = 10 {
         didSet {
+            // restart the game if complexity changes
             reset()
         }
     }
     
+    // upper and lower complexity bounds are fixed, so let the increase be configurable
     var complexityStep = 1
     @IBAction private func lessComplex(_ sender: Any) {
         if complexity > complexityStep + 1 {
@@ -59,9 +75,12 @@ class ControlView: UIView {
         }
     }
     
+    // let consumer class verify the answers
     @IBAction private func verifyAction(_ sender: Any) {
+        // display calculated score
         scoreLabel?.text = String(delegate!.verify())
         
+        // need this view for screen shot
         guard view != nil else {
             assertionFailure("view property must be set up")
             return
@@ -73,11 +92,16 @@ class ControlView: UIView {
         UIImageWriteToSavedPhotosAlbum(image!, nil, nil, nil)
     }
     
+    // let the consumer reset the game
     func reset() {
         attempts = 0
+        
+        // stop existing timer
         if timer != nil {
             timer?.invalidate()
         }
+        
+        // start counting again
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
             self?.secondsPassed += 1
         }
@@ -85,12 +109,15 @@ class ControlView: UIView {
         secondsPassed = 0
         scoreLabel?.text = "0"
         
+        // let consumer do its preparations
         delegate!.reset(complexity: complexity)
     }
 
+    // display timer
     @IBOutlet private weak var timeLabel: UILabel!
     private weak var timer: Timer?
     private var secondsPassed = 0 {
+        // don't display the date
         // https://stackoverflow.com/questions/26794703/swift-integer-conversion-to-hours-minutes-seconds
         didSet {
             let formatter = DateComponentsFormatter()
@@ -101,6 +128,7 @@ class ControlView: UIView {
         }
     }
 
+    // for IBDesignable
     private var contentView:UIView?
     
     required init?(coder aDecoder: NSCoder) {
@@ -127,6 +155,7 @@ class ControlView: UIView {
     }
 }
 
+// consumer has to implement those methods
 protocol GameControlDelegate: class {
     func reset(complexity: Int) -> Void
     func verify() -> Int
