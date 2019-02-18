@@ -8,27 +8,42 @@
 
 import UIKit
 
+// implements a randomized math worksheet with verification and screen shot to gallery
 class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+    // 18 problems to fill ipad portrait
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 18
     }
     
+    // create problem view cells for collection view
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "problemCell", for: indexPath) as! ProblemCell
         cell.problem.randomize(complexity: complexity)
         return cell
     }
     
+    // name and date set by launcher view
     public var initValues: (String?, String?) = (nil, nil)
+    
+    // math problems are displayed here
     @IBOutlet weak var problemsCollectionView: UICollectionView!
+    
     @IBOutlet weak var studentName: UILabel!
     @IBOutlet weak var assignmentDate: UILabel!
+    
+    // number of times Verify was pressed since last reset
     @IBOutlet weak var attemptsLabel: UILabel!
+    
+    // time elapsed since last reset
     @IBOutlet weak var timeLabel: UILabel!
+    
+    // last score computed
     @IBOutlet weak var scoreLabel: UILabel!
     
+    // count seconds since last reset
     private weak var timer: Timer?
     private var secondsPassed = 0 {
+        // don't display date
         // https://stackoverflow.com/questions/26794703/swift-integer-conversion-to-hours-minutes-seconds
         didSet {
             let formatter = DateComponentsFormatter()
@@ -46,21 +61,25 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
             scoreLabel.text = "\(Int(score * 100))"
         }
     }
+    
     var numberOfAttempts = 0 {
         didSet {
             attemptsLabel.text = "\(numberOfAttempts)"
         }
     }
     
+    // compute score
     @IBAction func verify(_ sender: UIButton) {
         wrongAnswers = 0
         eachProblem {
             if !$0.isCorrect {
+                // wrond answers are crossed out
                 $0.answer.attributedText = self.formatWrongAnswer($0.answer.text)
                 wrongAnswers += 1
             }
         }
         
+        // score formula
         numberOfAttempts += 1
         let NA = Double(numberOfAttempts)
         let TP = Double(problemsCollectionView.visibleCells.count)
@@ -71,6 +90,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         screenShot()
     }
     
+    // scroll the view if they keyboard will overlap currect answer text input
     // https://stackoverflow.com/questions/26689232/scrollview-and-keyboard-swift
     @IBOutlet weak var scrollView: UIScrollView!
     
@@ -104,6 +124,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         scrollView.contentOffset.y = 0
     }
 
+    // reset worksheet when complexity is changed by user
     @IBAction func moreComplex(_ sender: Any) {
         if complexity < 50 {
             complexity += 1
@@ -118,6 +139,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         }
     }
     
+    // reset display and randomize new worksheet
     private func reset() {
         numberOfAttempts = 0
         if timer != nil {
@@ -132,6 +154,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         randomizeProblems()
     }
     
+    // helper that runs a given closure on every problem
     private func eachProblem(_ f: (ProblemView) -> Void) {
         for problemCell in problemsCollectionView!.visibleCells as! [ProblemCell] {
             f(problemCell.problem)
@@ -142,6 +165,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         eachProblem({ $0.randomize(complexity: complexity) })
     }
     
+    // connect collection view, display name and date, and create problems
     override func loadView() {
         super.loadView()
         
@@ -161,6 +185,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         UIImageWriteToSavedPhotosAlbum(image!, nil, nil, nil)
     }
 
+    // not used yet
     // https://stackoverflow.com/questions/34206207/printing-the-view-in-ios-with-swift
     func print() {
         let printInfo = UIPrintInfo(dictionary:nil)
@@ -185,10 +210,12 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     }
 }
 
+// for collection view
 class ProblemCell: UICollectionViewCell {
     @IBOutlet weak var problem: ProblemView!
 }
 
+// from printing example
 // https://stackoverflow.com/questions/34206207/printing-the-view-in-ios-with-swift
 extension UIView {
     func toImage() -> UIImage {
