@@ -101,17 +101,23 @@ class MatchingViewController: UIViewController, GameInitialization, GameControlD
                     }
                     else {
                         wrongAnswers += 1
+                        let l = links!.get((x, y), b!)!
+                        l.layer.borderColor = UIColor.red.cgColor
+                        l.layer.borderWidth = 3
                     }
                 }
                 else { // test for missed matches
                     let neighbours = buttons!.neighbors((x, y))
                     let coords = neighbours.map({ $0.coords! })
                     let available = coords.filter({ !links!.isLinked($0) })
-                    let values = available.map({ buttons!.get($0)!.value })
+                    let values = available.map({ ($0, buttons!.get($0)!.value) })
                     
                     for v2 in values {
-                        if v1 + v2 == 10 {
+                        if v1 + v2.1 == 10 {
                             missedMatches += 1
+                            let link = links!.link((x, y), v2.0)!
+                            link.layer.borderColor = UIColor.blue.cgColor
+                            link.layer.borderWidth = 3
                         }
                     }
                 }
@@ -151,7 +157,7 @@ class Links {
         self.frameFactory = frameFactory
     }
     
-    func link(_ a: (Int, Int), _ b: (Int, Int)) {
+    func link(_ a: (Int, Int), _ b: (Int, Int)) -> UIView? {
         if !isLinked(a), !isLinked(b) {
             links.append((a, b))
             let view = UIView(frame: frameFactory(a, b))
@@ -162,7 +168,10 @@ class Links {
             view.isUserInteractionEnabled = false
             views[coordsToList(a, b)] = view
             superview.addSubview(view)
+            
+            return view
         }
+        return nil
     }
     
     func linkedTo(_ coords: (Int, Int)) -> (Int, Int)? {
@@ -196,6 +205,14 @@ class Links {
             }
         }
         return false
+    }
+    
+    func get(_ a: (Int, Int), _ b: (Int, Int)) -> UIView? {
+        let key = coordsToList(a, b)
+        if views[key] != nil {
+            return views[key]
+        }
+        return views[coordsToList(b, a)]
     }
     
     private func findIndex(_ coords: (Int, Int)) -> Int? {
