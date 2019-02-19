@@ -79,6 +79,7 @@ class ControlView: UIView {
     @IBAction private func verifyAction(_ sender: Any) {
         // display calculated score
         scoreLabel?.text = String(delegate!.verify())
+        attempts += 1
         
         // need this view for screen shot
         guard view != nil else {

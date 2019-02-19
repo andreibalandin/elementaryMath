@@ -31,13 +31,9 @@ class MatchingViewController: UIViewController, GameInitialization, GameControlD
     
     // create a new game if user changes complexity in the header
     func reset(complexity: Int) {
-        // set geometry
-        let width = Int(view.frame.size.width)
-        let height = width
-        let yOffset = 200
-        let buttonCount = 5 + 6 * complexity/100
-        let size = width/buttonCount
-        let padding = 10
+        // clean up state
+        selectedButton = nil
+        selectedNeighbour = nil
         
         // destroy existing buttons
         if buttons != nil {
@@ -45,6 +41,19 @@ class MatchingViewController: UIViewController, GameInitialization, GameControlD
                 button!.button.removeFromSuperview()
             }
         }
+
+        // destroy existing links
+        if links != nil {
+            links?.destroy()
+        }
+
+        // set geometry
+        let width = Int(view.frame.size.width)
+        let height = width
+        let yOffset = 200
+        let buttonCount = 5 + 6 * complexity/100
+        let size = width/buttonCount
+        let padding = 10
         
         // create storage for new buttons
         buttons = Matrix<MatchingButtonWrapper>(width/size, height/size)
@@ -63,11 +72,6 @@ class MatchingViewController: UIViewController, GameInitialization, GameControlD
                 button.button.addTarget(self, action: #selector(tapDigit(sender:)), for: .touchUpInside)
                 view.addSubview(button.button)
             }
-        }
-        
-        // destroy existing links
-        if links != nil {
-            links?.destroy()
         }
         
         // create storage for links
@@ -222,6 +226,8 @@ class Links {
             
             return view
         }
+        
+        print("\(a) and \(b) are already linked")
         return nil
     }
     
