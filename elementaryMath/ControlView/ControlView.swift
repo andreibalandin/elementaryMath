@@ -18,10 +18,10 @@ class ControlView: UIView {
     // simplify access and hide implementation detail
     var name: String {
         get {
-            return (nameLabel?.text)!
+            return nameLabel.text!
         }
         set {
-            nameLabel?.text = newValue
+            nameLabel.text = newValue
         }
     }
     
@@ -85,6 +85,7 @@ class ControlView: UIView {
             assertionFailure("view property must be set up")
             return
         }
+        
         UIGraphicsBeginImageContext(view!.frame.size)
         view!.layer.render(in: UIGraphicsGetCurrentContext()!)
         let image = UIGraphicsGetImageFromCurrentImageContext()

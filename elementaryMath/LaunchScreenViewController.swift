@@ -22,26 +22,24 @@ class LaunchScreenViewController: UIViewController {
 
     // before choosing a worksheet, name and current date must be filled
     private func verify() -> Bool {
-        let isNameValid = verifyName(studentName?.text)
+        let isNameValid = verifyName(studentName.text)
         if !isNameValid {
-            studentName.attributedText = self.formatWrongAnswer(studentName?.text)
+            studentName.attributedText = self.formatWrongAnswer(studentName.text)
         }
 
         let isDateValid = verifyDate(date)
         if !isDateValid {
-            assignmentDate?.attributedText = self.formatWrongAnswer(assignmentDate?.text)
+            assignmentDate?.attributedText = self.formatWrongAnswer(assignmentDate.text)
         }
         
         return isNameValid && isDateValid
     }
     
     // name can be any letter sequence
-    private func verifyName(_ name:String?) -> Bool {
+    private func verifyName(_ name: String?) -> Bool {
         let regex = try! NSRegularExpression(pattern: "[a-z]+", options: .caseInsensitive)
         let range = NSRange(location: 0, length: name!.utf16.count)
-        let isValid = regex.firstMatch(in: name!, options: [], range: range) != nil
-        
-        return isValid
+        return regex.firstMatch(in: name!, options: [], range: range) != nil
     }
     
     // date must be todays date
@@ -64,7 +62,7 @@ class LaunchScreenViewController: UIViewController {
         case "calculationsGameSegue":
             // this screen has original header code in it
             let calcualtionsGameController = segue.destination as! ViewController
-            calcualtionsGameController.initValues = (studentName!.text, assignmentDate!.text)
+            calcualtionsGameController.initValues = (studentName.text, assignmentDate.text)
         case "matchingGameSegue":
             // here the header was extracted into its own class
             var props = segue.destination as! GameInitialization

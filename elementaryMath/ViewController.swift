@@ -50,7 +50,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
             formatter.allowedUnits = [.hour, .minute, .second]
             formatter.unitsStyle = .full
             
-            timeLabel.text = formatter.string(from: TimeInterval(secondsPassed))!
+            timeLabel.text = formatter.string(from: TimeInterval(secondsPassed))
         }
     }
     

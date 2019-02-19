@@ -55,10 +55,12 @@ class MatchingViewController: UIViewController, GameInitialization, GameControlD
                 let buttonFrame = CGRect(x:x*size+padding, y:y*size+yOffset+padding, width:size-padding*2, height:size-padding*2)
                 let button = MatchingButtonWrapper(frame: buttonFrame)
                 button.coords = (x, y)
+                
+                // need to retrieve the wrapper on tap, using tag to store wrapper index
                 button.button.tag = buttons!.CoordsToIndex(button.coords!)
                 buttons!.set(button.coords!, button)
                 button.button.setTitle(String(Int.random(in: 1..<10)), for:.normal)
-                button.button.addTarget(self, action: #selector(MatchingViewController.tapDigit(sender:)), for: .touchUpInside)
+                button.button.addTarget(self, action: #selector(tapDigit(sender:)), for: .touchUpInside)
                 view.addSubview(button.button)
             }
         }
@@ -77,8 +79,7 @@ class MatchingViewController: UIViewController, GameInitialization, GameControlD
             let right = (max(x1, x2) + 1) * size - padding/2
             let top = min(y1, y2) * size + yOffset + padding/2
             let bottom = (max(y1, y2) + 1) * size + yOffset - padding/2
-            let result = CGRect(x: left, y: top, width: right-left, height: bottom-top)
-            return result
+            return CGRect(x: left, y: top, width: right-left, height: bottom-top)
         })
     }
     
@@ -141,10 +142,10 @@ class MatchingViewController: UIViewController, GameInitialization, GameControlD
                 else { // test for missed matches
                     let neighbours = buttons!.neighbors((x, y))
                     let coords = neighbours.map({ $0.coords! })
-                    let available = coords.filter({ !links!.isLinked($0) })
-                    let values = available.map({ ($0, buttons!.get($0)!.value) })
+                    let notLinked = coords.filter({ !links!.isLinked($0) })
+                    let coordsValues = notLinked.map({ ($0, buttons!.get($0)!.value) })
                     
-                    for v2 in values {
+                    for v2 in coordsValues {
                         if v1 + v2.1 == 10 {
                             missedMatches += 1
                             let link = links!.link((x, y), v2.0)!
@@ -224,6 +225,7 @@ class Links {
         return nil
     }
     
+    // what coords are linked to given coords?
     func linkedTo(_ coords: (Int, Int)) -> (Int, Int)? {
         let i = findIndex(coords)
         if i == nil {
@@ -257,6 +259,7 @@ class Links {
         return false
     }
     
+    // links are not directional, so need to check both (a, b) and (b, a)
     func get(_ a: (Int, Int), _ b: (Int, Int)) -> UIView? {
         let key = coordsToList(a, b)
         if views[key] != nil {
@@ -282,7 +285,7 @@ class Links {
     }
 }
 
-// 2d arrays are cumbersome in swift, might as well reinvent a wheel
+// 2d arrays are cumbersome in swift, reinventing a wheel
 // it is generic to support square wheels
 class Matrix<T> {
     let columns: Int
@@ -296,11 +299,12 @@ class Matrix<T> {
         data = Array<T?>(repeating: nil, count: columns * rows)
     }
     
+    // index and coords are interchangeable via CoordsToIndex/IndexToCoords
     func CoordsToIndex(_ coords: (Int, Int)) -> Int {
         let (x, y) = coords
         return y * rows + x
     }
-    
+
     func IndexToCoords(_ index: Int) -> (Int, Int) {
         return (index % columns, index / columns)
     }
@@ -317,12 +321,14 @@ class Matrix<T> {
         data[CoordsToIndex(coords)] = value
     }
     
+    // neighbors are the locations to the top, bottom, left and right
     func isNeighbour(_ a: (Int, Int), _ b: (Int, Int)) -> Bool {
         let (x1, y1) = a
         let (x2, y2) = b
         return abs(x1 - x2) + abs(y1 - y2) == 1
     }
     
+    // get the neighbors of a cell
     func neighbors(_ coords: (Int, Int)) -> [T] {
         let (x, y) = coords
         let neighbourCoords = [(x - 1, y), (x + 1, y), (x, y - 1), (x, y + 1)].filter({[weak self] in
