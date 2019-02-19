@@ -18,6 +18,7 @@ class MatchingViewController: UIViewController, GameInitialization, GameControlD
     
     // links between numbers and helper functions to handle them
     private var links: Links? = nil
+    private var highlights: Links? = nil
     
     // 2d grid of number buttons and helper functions
     private var buttons: Matrix<MatchingButtonWrapper>?
@@ -46,6 +47,9 @@ class MatchingViewController: UIViewController, GameInitialization, GameControlD
         if links != nil {
             links?.destroy()
         }
+        if highlights != nil {
+            highlights?.destroy()
+        }
 
         // set geometry
         let width = Int(view.frame.size.width)
@@ -55,9 +59,8 @@ class MatchingViewController: UIViewController, GameInitialization, GameControlD
         let size = width/buttonCount
         let padding = 10
 
-        // create storage for links
         // provide a closure that will create views for new links
-        links = Links(view, {a, b in
+        let frameFactory: ((Int, Int), (Int, Int)) -> CGRect = {a, b in
             let (x1, y1) = a
             let (x2, y2) = b
             let left = min(x1, x2) * size + padding/2
@@ -65,7 +68,11 @@ class MatchingViewController: UIViewController, GameInitialization, GameControlD
             let top = min(y1, y2) * size + yOffset + padding/2
             let bottom = (max(y1, y2) + 1) * size + yOffset - padding/2
             return CGRect(x: left, y: top, width: right-left, height: bottom-top)
-        })
+        }
+        
+        // create storage for links
+        links = Links(view, frameFactory)
+        highlights = Links(view, frameFactory)
         
         // create storage for new buttons
         buttons = Matrix<MatchingButtonWrapper>(width/size, height/size)
@@ -133,6 +140,7 @@ class MatchingViewController: UIViewController, GameInitialization, GameControlD
                 if b != nil {
                     let v2 = buttons!.get(b!)!.value
                     if v1 + v2 == 10 {
+                        print("correct link \((x,y))=\(v1) to \(b!)=\(v2)")
                         correctAnswers += 1
                     }
                     else {
@@ -146,16 +154,26 @@ class MatchingViewController: UIViewController, GameInitialization, GameControlD
                 else { // test for missed matches
                     let neighbours = buttons!.neighbors((x, y))
                     let coords = neighbours.map({ $0.coords! })
-                    let notLinked = coords.filter({ !links!.isLinked($0) })
+                    // should not have an existing link (user-made or highlighted here)
+                    var notLinked = coords.filter({ !links!.isLinked($0) })
+                    notLinked = coords.filter({ !highlights!.isLinked($0) })
                     let coordsValues = notLinked.map({ ($0, buttons!.get($0)!.value) })
                     
                     for v2 in coordsValues {
-                        if v1 + v2.1 == 10 {
+                        if v1 + v2.1 == 10, !(highlights!.isLinked((x,y))), !(highlights!.isLinked(v2.0)) {
+                            print("highlights \(v2.0).isLinked=\(highlights!.isLinked(v2.0))")
                             missedMatches += 1
-                            let link = links!.link((x, y), v2.0)!
+                            print("highlight \((x,y)) to \(v2.0)")
+                            let view = highlights!.link((x, y), v2.0)
+                            if view == nil {
+                                print("link \((x,y)) -> \(links!.linkedTo((x,y))), isLinked=\(links!.isLinked((x,y)))")
+                                print("highlight \((x,y)) -> \(highlights!.linkedTo((x,y))), isLinked=\(highlights!.isLinked((x,y)))")
+                                print("link \(v2.0) -> \(links!.linkedTo(v2.0)), isLinked=\(links!.isLinked(v2.0))")
+                                print("highlight \(v2.0) -> \(highlights!.linkedTo(v2.0)), isLinked=\(highlights!.isLinked(v2.0))")
+                            }
                             // highlight missed matches with blue
-                            link.layer.borderColor = UIColor.blue.cgColor
-                            link.layer.borderWidth = 3
+                            view!.layer.borderColor = UIColor.blue.cgColor
+                            view!.layer.borderWidth = 3
                         }
                     }
                 }
@@ -163,6 +181,7 @@ class MatchingViewController: UIViewController, GameInitialization, GameControlD
         }
         
         // compute score
+        print("correctAnswers=\(correctAnswers) wrongAnswers=\(wrongAnswers) missedMatches=\(missedMatches)")
         if Int(correctAnswers + wrongAnswers + missedMatches) == 0 {
             return 100
         }
@@ -209,25 +228,30 @@ class Links {
     func link(_ a: (Int, Int), _ b: (Int, Int)) -> UIView? {
         if !isLinked(a), !isLinked(b) {
             links.append((a, b))
-            let view = UIView(frame: frameFactory(a, b))
-            
-            //should be displayed at the bottom
-            view.layer.zPosition = 0
-            view.layer.borderWidth = 2
-            
-            // have to use transparent background, because of zPosition didn't work on simulated screenshot
-            view.layer.backgroundColor = UIColor(displayP3Red: 0, green: 0, blue: 0, alpha: 0).cgColor
-            view.layer.cornerRadius = 15
-            view.isUserInteractionEnabled = false
-            
-            // save new view in the dictionary indexed by its coords
-            views[coordsToList(a, b)] = view
-            superview.addSubview(view)
-            
-            return view
+            return visual(a, b)
         }
         
+        // link already exists, return its view
         return get(a, b)
+    }
+    
+    private func visual(_ a: (Int, Int), _ b: (Int, Int)) -> UIView? {
+        let view = UIView(frame: frameFactory(a, b))
+        
+        //should be displayed at the bottom
+        view.layer.zPosition = 0
+        view.layer.borderWidth = 2
+        
+        // have to use transparent background, because of zPosition didn't work on simulated screenshot
+        view.layer.backgroundColor = UIColor(displayP3Red: 0, green: 0, blue: 0, alpha: 0).cgColor
+        view.layer.cornerRadius = 15
+        view.isUserInteractionEnabled = false
+        
+        // save new view in the dictionary indexed by its coords
+        views[coordsToList(a, b)] = view
+        superview.addSubview(view)
+        
+        return view
     }
     
     // what coords are linked to given coords?

@@ -38,6 +38,11 @@ class ControlView: UIView {
     
     // write computed score here
     @IBOutlet private weak var scoreLabel: UILabel!
+    private(set) var score = 0 {
+        didSet {
+            scoreLabel.text = String(score)
+        }
+    }
     
     // and the number of times verify button was pressed
     @IBOutlet private weak var attemptsLabel: UILabel!
@@ -78,8 +83,10 @@ class ControlView: UIView {
     // let consumer class verify the answers
     @IBAction private func verifyAction(_ sender: Any) {
         // display calculated score
-        scoreLabel?.text = String(delegate!.verify())
         attempts += 1
+        let newScore = delegate!.verify()
+        print("newScore=\(newScore)")
+        score = (score * (attempts - 1) + newScore)/attempts
         
         // need this view for screen shot
         guard view != nil else {
