@@ -54,6 +54,18 @@ class MatchingViewController: UIViewController, GameInitialization, GameControlD
         let buttonCount = 5 + 6 * complexity/100
         let size = width/buttonCount
         let padding = 10
+
+        // create storage for links
+        // provide a closure that will create views for new links
+        links = Links(view, {a, b in
+            let (x1, y1) = a
+            let (x2, y2) = b
+            let left = min(x1, x2) * size + padding/2
+            let right = (max(x1, x2) + 1) * size - padding/2
+            let top = min(y1, y2) * size + yOffset + padding/2
+            let bottom = (max(y1, y2) + 1) * size + yOffset - padding/2
+            return CGRect(x: left, y: top, width: right-left, height: bottom-top)
+        })
         
         // create storage for new buttons
         buttons = Matrix<MatchingButtonWrapper>(width/size, height/size)
@@ -73,18 +85,6 @@ class MatchingViewController: UIViewController, GameInitialization, GameControlD
                 view.addSubview(button.button)
             }
         }
-        
-        // create storage for links
-        // provide a closure that will create views for new links
-        links = Links(view, {a, b in
-            let (x1, y1) = a
-            let (x2, y2) = b
-            let left = min(x1, x2) * size + padding/2
-            let right = (max(x1, x2) + 1) * size - padding/2
-            let top = min(y1, y2) * size + yOffset + padding/2
-            let bottom = (max(y1, y2) + 1) * size + yOffset - padding/2
-            return CGRect(x: left, y: top, width: right-left, height: bottom-top)
-        })
     }
     
     // taps are used to create new links and delete existing
@@ -227,8 +227,7 @@ class Links {
             return view
         }
         
-        print("\(a) and \(b) are already linked")
-        return nil
+        return get(a, b)
     }
     
     // what coords are linked to given coords?
