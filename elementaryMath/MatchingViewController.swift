@@ -164,7 +164,10 @@ class MatchingViewController: UIViewController, GameInitialization, GameControlD
                     let coordsValues = notLinked.map({ ($0, buttons!.get($0)!.value) })
                     
                     for v2 in coordsValues {
-                        if v1 + v2.1 == 10, !(highlights!.isLinked((x,y))), !(highlights!.isLinked(v2.0)) {
+                        if v1 + v2.1 == 10,
+                            !(highlights!.isLinked((x,y))), !(highlights!.isLinked(v2.0)),
+                            !(links!.isLinked((x,y))), !(links!.isLinked(v2.0))
+                        {
                             print("highlights \(v2.0).isLinked=\(highlights!.isLinked(v2.0))")
                             missedMatches += 1
                             print("highlight \((x,y)) to \(v2.0)")
