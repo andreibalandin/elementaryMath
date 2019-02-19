@@ -130,6 +130,10 @@ class MatchingViewController: UIViewController, GameInitialization, GameControlD
         var wrongAnswers = 0.0
         var missedMatches = 0.0
         
+        if highlights != nil {
+            highlights!.destroy()
+        }
+        
         // scan button grid
         for x in 0..<buttons!.columns {
             for y in 0..<buttons!.rows {
@@ -308,6 +312,7 @@ class Links {
     }
     
     func destroy() {
+        links = []
         for (_, view) in views {
             view.removeFromSuperview()
         }
