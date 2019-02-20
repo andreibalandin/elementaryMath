@@ -21,7 +21,7 @@ class ProblemView: UIView {
     private var contentView:UIView?
     
     var expression:String {
-        return (leftOperand?.text)! + (operation?.text)! + (rightOperand?.text)! + (comparison?.text)! + (answer?.text)!
+        return [leftOperand, operation, rightOperand, comparison].map({ $0.text.nonnullable }).joined() + answer.text.nonnullable
     }
     
     // validate the answer
@@ -71,5 +71,11 @@ class ProblemView: UIView {
         let bundle = Bundle(for: type(of: self))
         let nib = UINib(nibName: "ProblemView", bundle: bundle)
         return nib.instantiate(withOwner: self, options: nil).first as? UIView
+    }
+}
+
+extension Optional where Wrapped == String {
+    var nonnullable: String {
+        return self ?? ""
     }
 }
